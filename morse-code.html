@@ -1,0 +1,374 @@
+<html>
+  <!--    Morse Tone Generator    -->
+  <!--  By Michael K. Pellegrino  -->
+  <!--       April 23, 2022       -->
+  
+  <head>
+    <title>Morse Code Tone Generator - Michael K. Pellegrino</title>
+    <script src="wav.js"></script>
+    <script language="javascript">
+
+      /* Uses: wav.js that is Copyright (c) 2015 Kevin Phillips */
+      /* It's available here:  http://kmp1.github.io/wav.js     */
+      var wave=0;
+      var freq=54;
+
+      function no_dit()
+      {
+	  for( var j=0; j<1*2*Math.PI; j+=2*Math.PI/(44.100*55))
+	  {
+	      wave.addSampleToAllChannels( 127);
+	  }
+	  
+      }
+
+      function letter_space()
+      {
+	  /* 3 no_dits between letters */
+	  /* 1 is included in the dit/dah */
+	  no_dit();
+	  no_dit();
+      }
+      
+      function word_space()
+      {
+	  /* 7 no_dits between letters */
+	  /* 1 is included in the dit/dah */
+	  for( var i=0; i<6; i++ ) no_dit();
+	  
+      }
+      function dit()
+      {
+	  for( var j=0; j<2*Math.PI; j+=2*Math.PI/(44.100*55))
+	  {
+	      wave.addSampleToAllChannels( Math.sin( freq*j )*127 + 127);
+	  }
+	  no_dit();
+      }
+      
+      function dah()
+      {
+	  for( var j=0; j<6*Math.PI; j+=2*Math.PI/(44.100*55))
+	  {
+	      wave.addSampleToAllChannels( Math.sin( freq*j )*127 + 127);
+	  }
+	  no_dit();
+      }
+
+      function char2morse(c)
+      {
+	  switch (c)
+	  {
+	      case '_':
+	      dit(); dit(); dah(); dah(); dit(); dah();
+	      break;
+	      case '+':
+	      dit(); dah(); dit(); dah(); dit();
+	      break;
+	      case '*':
+	      dah(); dit(); dit(); dah();
+	      break;
+	      case '=':
+	      dah(); dit(); dit(); dit(); dah();
+	      break;
+	      case ')':
+	      dah(); dit(); dah(); dah(); dit(); dah();
+	      break;
+	      case '(':
+	      dah(); dit(); dah(); dah(); dit();
+	      break;
+	      case ',':
+	      dit(); dah(); dit(); dah(); dit(); dah();
+	      break;
+	      case ',':
+	      dah(); dah(); dit(); dit(); dah(); dah();
+	      break;
+	      case '?':
+	      dit(); dit(); dah(); dah(); dit(); dit();
+	      break;
+	      case ';':
+	      dah(); dit(); dah(); dit(); dah(); dit();
+	      break;
+	      case ':':
+	      dah(); dah(); dah(); dit(); dit(); dit();
+	      break;
+	      case '-':
+	      dah(); dit(); dit(); dit(); dit(); dah();
+	      break;
+	      case '/':
+	      dah(); dit(); dit(); dah(); dit();
+	      break;
+	      case "'":
+	      dit(); dah(); dah(); dah(); dah(); dit();
+	      break;
+	      case '"':
+	      dit(); dah(); dit(); dit(); dah(); dit();
+	      break;
+	      case 'A':
+	      case 'a':
+	      dit(); dah();
+	      break;
+
+	      case 'B':
+	      case 'b':
+	      dah(); dit(); dit(); dit();
+	      break;
+
+	      case 'C':
+	      case 'c':
+	      dah(); dit(); dah(); dit();
+	      break;
+
+	      case 'D':
+	      case 'd':
+	      dah(); dit(); dit();
+	      break;
+
+	      case 'E':
+	      case 'e':
+	      dit();
+	      break;
+
+	      case 'F':
+	      case 'f':
+	      dit(); dit(); dah(); dit();
+	      break;
+
+	      case 'G':
+	      case 'g':
+	      dah(); dah(); dit();
+	      break;
+
+	      case 'H':
+	      case 'h':
+	      dit(); dit(); dit(); dit();
+	      break;
+
+	      case 'I':
+	      case 'i':
+	      dit(); dit();
+	      break;
+
+	      case 'J':
+	      case 'j':
+	      dit(); dah(); dah(); dah();
+	      break;
+
+	      case 'K':
+	      case 'k':
+	      dah(); dit(); dah();
+	      break;
+
+	      case 'L':
+	      case 'l':
+	      dit(); dah(); dit(); dit();
+	      break;
+
+	      case 'M':
+	      case 'm':
+	      dah(); dah();
+	      break;
+
+	      case 'N':
+	      case 'n':
+	      dah(); dit();
+	      break;
+
+	      case 'O':
+	      case 'o':
+	      dah(); dah(); dah(); 
+	      break;
+
+	      case 'P':
+	      case 'p':
+	      dit(); dah(); dah(); dit();
+	      break;
+
+	      case 'Q':
+	      case 'q':
+	      dah(); dah(); dit(); dah();
+	      break;
+
+	      case 'R':
+	      case 'r':
+	      dit(); dah(); dit();
+	      break;
+
+	      case 'S':
+	      case 's':
+	      dit(); dit(); dit();
+	      break;
+
+	      case 'T':
+	      case 't':
+	      dah();
+	      break;
+
+	      case 'U':
+	      case 'u':
+	      dit(); dit(); dah();
+	      break;
+
+	      case 'V':
+	      case 'v':
+	      dit(); dit(); dit(); dah();
+	      break;
+
+	      case 'W':
+	      case 'w':
+	      dit(); dah(); dah();
+	      break;
+
+	      case 'X':
+	      case 'x':
+	      dah(); dit(); dit(); dah();
+	      break;
+
+	      case 'Y':
+	      case 'y':
+	      dah(); dit(); dah(); dah();
+	      break;
+
+	      case 'Z':
+	      case 'z':
+	      dah(); dah(); dit(); dit();
+	      break;
+
+	      case '0':
+	      dah(); dah(); dah(); dah(); dah();
+	      break;
+
+	      case '1':
+	      dit(); dah(); dah(); dah(); dah();
+	      break;
+
+	      case '2':
+	      dit(); dit(); dah(); dah(); dah();
+	      break;
+
+	      case '3':
+	      dit(); dit(); dit(); dah(); dah();
+	      break;
+
+	      case '4':
+	      dit(); dit(); dit(); dit(); dah();
+	      break;
+
+	      case '5':
+	      dit(); dit(); dit(); dit(); dit();
+	      break;
+
+	      case '6':
+	      dah(); dit(); dit(); dit(); dit();
+	      break;
+
+	      case '7':
+	      dah(); dah(); dit(); dit(); dit();
+	      break;
+
+	      case '8':
+	      dah(); dah(); dah(); dit(); dit();
+	      break;
+
+	      case '9':
+	      dah(); dah(); dah(); dah(); dit();
+	      break;
+
+	      case ' ':
+	      case '\n':
+	      word_space();
+	      break;
+
+	      default:
+
+	      break;
+
+	  }
+	  letter_space();
+      }
+
+      function onload()
+      {
+	  form1.text_area.value="Hello World!";
+	  toggle("instructions");
+	  return;
+
+      }
+
+      function processTextArea()
+      {
+	  var text = form1.text_area.value;
+	  for( var i = 0; i<text.length; i++ )
+	  {
+	      char2morse( text[i] );
+	  }
+	  return text.length;
+      }
+
+      function saveByteArray()
+      {
+	  wave = wav.create(2, 44100, wav.SampleSize.EIGHT);
+	  pointer=0;
+	  if( processTextArea() == 0 ) return;
+	  
+	  res = wave.toByteArray();
+	  let byte = new Uint8Array(res);
+	  
+	  var blob = new Blob([byte], {type: "application/wav"});
+	  var link = document.createElement('a');
+	  link.href = window.URL.createObjectURL(blob);
+	  
+	  var fileName = form1.fn.value;
+	  if( fileName == "" )
+	  {
+	      fileName="no_name.wav";
+	  }
+
+	  if( fileName.slice(-4) != ".wav" && fileName.slice(-4) != ".WAV" )
+	  {
+	      fileName+=".wav";
+	  }
+	  form1.fn.value = fileName;
+	  link.download = fileName;
+	  link.click();
+
+      }
+
+      
+      function toggle( text )
+      {
+	  if (document.getElementById(text).style.display == "block")
+	  {
+	      document.getElementById(text).style.display = "none";
+	  }
+	  else
+	  {
+	      document.getElementById(text).style.display = "block";
+	  }
+
+      }
+      
+    </script>
+  </head>
+  <body onload="onload();">
+    
+    <form name='form1' action='' method='GET'>
+      <p><center><font size=+3>Morse Code Tone Generator</font></center></p>
+      <p><center>By: <a target=_blank href="http://mkpelleg.freeshell.org">Michael K. Pellegrino</a></center></p>
+      <p><center>Version 1.00 - 2022 04 23</center></p>
+      <p>This program will create a Morse Code wav audio file from the given text.</p>
+      <p>The program uses <a target=_blank href="http://kmp1.github.io/wav.js/">wav.js</a> by Kevin Phillips.</p>
+      <p><input type='button' onclick='javascript:toggle("instructions");' value='Hide/Show Instructions'></p>
+      <ul id="instructions"><p><b>INSTRUCTIONS:</b></p><li>Type text and numbers into the textbox (below)</li><li>Change the filename (optional)</li><li>Click on &#34;Download WAV file&#34; to download the audio.</li></ul>
+
+      <center>
+	
+	<p>Filename: <input type='fn' id='fn' name='fn' value='no_name.wav' size=10><input type='button' onclick='javascript:saveByteArray();' value='Download WAV file'></p>
+	<p><textarea cols=80 rows=20 name='text_area'></textarea></p>
+	<hr>
+	<p align="center"><font size=-1><i>Morse Code Tone Generator - (C) 2022 - <a target=_blank href="http://mkpelleg.freeshell.org">Michael K. Pellegrino</a></i></font></p>
+    </form>
+
+    </center>
+</html>
+
